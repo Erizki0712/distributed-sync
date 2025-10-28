@@ -1,0 +1,366 @@
+{
+  "info": {
+    "_postman_id": "6a9d2f2c-fbc7-41ee-8900-e2f2c2102bfe",
+    "name": "Distributed Sync System (Local) v2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Updated collection with per-node Lock endpoints and Raft status helpers."
+  },
+  "item": [
+    {
+      "name": "Health & Metrics",
+      "item": [
+        {
+          "name": "Health - Node 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode1}}/health"
+          }
+        },
+        {
+          "name": "Health - Node 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode2}}/health"
+          }
+        },
+        {
+          "name": "Health - Node 3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode3}}/health"
+          }
+        },
+        {
+          "name": "Metrics - Node 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode1}}/metrics"
+          }
+        },
+        {
+          "name": "Metrics - Node 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode2}}/metrics"
+          }
+        },
+        {
+          "name": "Metrics - Node 3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode3}}/metrics"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Raft",
+      "item": [
+        {
+          "name": "Status - Node 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode1}}/raft/status"
+          }
+        },
+        {
+          "name": "Status - Node 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode2}}/raft/status"
+          }
+        },
+        {
+          "name": "Status - Node 3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode3}}/raft/status"
+          }
+        },
+        {
+          "name": "Leader - Node 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode1}}/raft/leader"
+          }
+        },
+        {
+          "name": "Leader - Node 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode2}}/raft/leader"
+          }
+        },
+        {
+          "name": "Leader - Node 3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrlNode3}}/raft/leader"
+          }
+        },
+        {
+          "name": "Start Election (Node 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode1}}/raft/start_election",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"force\": true\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lock Manager",
+      "item": [
+        {
+          "name": "Acquire - Node 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode1}}/lock/acquire",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{lockKey}}\",\n  \"mode\": \"{{lockMode}}\",\n  \"client\": \"{{clientId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Acquire - Node 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode2}}/lock/acquire",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{lockKey}}\",\n  \"mode\": \"{{lockMode}}\",\n  \"client\": \"{{clientId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Acquire - Node 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode3}}/lock/acquire",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{lockKey}}\",\n  \"mode\": \"{{lockMode}}\",\n  \"client\": \"{{clientId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Release - Node 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode1}}/lock/release",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{lockKey}}\",\n  \"client\": \"{{clientId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Release - Node 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode2}}/lock/release",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{lockKey}}\",\n  \"client\": \"{{clientId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Release - Node 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode3}}/lock/release",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{lockKey}}\",\n  \"client\": \"{{clientId}}\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Queue",
+      "item": [
+        {
+          "name": "Publish (Node 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode1}}/queue/publish",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"{{topic}}\",\n  \"value\": \"{{value}}\",\n  \"key\": \"{{routingKey}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Consume (Node 2)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode2}}/queue/consume",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"{{topic}}\",\n  \"group\": \"{{group}}\",\n  \"timeout_ms\": \"{{timeoutMs}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "if (pm.response.code === 200) {",
+                  "  try { var data = pm.response.json(); if (data.msg_id) { pm.environment.set('msg_id', data.msg_id); } } catch(e){}",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ack (Node 3)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode3}}/queue/ack",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"{{topic}}\",\n  \"group\": \"{{group}}\",\n  \"msg_id\": \"{{msg_id}}\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cache (MESI)",
+      "item": [
+        {
+          "name": "PUT (Node 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode1}}/cache/put",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{cacheKey}}\",\n  \"value\": \"{{cacheValue}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "GET (Node 2)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode2}}/cache/get",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{cacheKey}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "GET (Node 3)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrlNode3}}/cache/get",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{cacheKey}}\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
