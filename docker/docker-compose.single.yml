@@ -1,0 +1,24 @@
+services:
+  redis-single:
+    image: redis:7.2
+    ports: ["6380:6379"]
+    networks: [dnet_single]
+
+  node-s1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.node
+    container_name: node-s1
+    environment:
+      NODE_ID: node-s1
+      RPC_HOST: 0.0.0.0
+      RPC_PORT: "8201"
+      REDIS_URL: "redis://redis-single:6379/0"
+      PEERS: ""
+      QUEUE_VISIBILITY_TIMEOUT_MS: "60000"
+    depends_on: [redis-single]
+    ports: ["8201:8201"]
+    networks: [dnet_single]
+
+networks:
+  dnet_single: {}

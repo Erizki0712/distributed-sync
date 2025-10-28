@@ -1,0 +1,53 @@
+services:
+  redis:
+    image: redis:7.2
+    ports: ["6379:6379"]
+    networks: [dnet]
+
+  node-1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.node
+    container_name: node-1
+    environment:
+      NODE_ID: node-1
+      RPC_HOST: 0.0.0.0
+      RPC_PORT: "8101"
+      REDIS_URL: "redis://redis:6379/0"
+      PEERS: "http://node-2:8102/node-2,http://node-3:8103/node-3"
+    depends_on: [redis]
+    ports: ["8101:8101"]
+    networks: [dnet]
+
+  node-2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.node
+    container_name: node-2
+    environment:
+      NODE_ID: node-2
+      RPC_HOST: 0.0.0.0
+      RPC_PORT: "8102"
+      REDIS_URL: "redis://redis:6379/0"
+      PEERS: "http://node-1:8101/node-1,http://node-3:8103/node-3"
+    depends_on: [redis]
+    ports: ["8102:8102"]
+    networks: [dnet]
+
+  node-3:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.node
+    container_name: node-3
+    environment:
+      NODE_ID: node-3
+      RPC_HOST: 0.0.0.0
+      RPC_PORT: "8103"
+      REDIS_URL: "redis://redis:6379/0"
+      PEERS: "http://node-1:8101/node-1,http://node-2:8102/node-2"
+    depends_on: [redis]
+    ports: ["8103:8103"]
+    networks: [dnet]
+
+networks:
+  dnet: {}
